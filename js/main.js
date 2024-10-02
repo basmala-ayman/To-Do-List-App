@@ -48,7 +48,7 @@ if (localStorage.getItem('tasks')) {
     arrTasks = JSON.parse(localStorage.getItem('tasks'));
 }
 
-getData();
+getDataFromLS();
 
 function takeInput() {
     if (inputTask.value != '') {
@@ -97,8 +97,12 @@ function addTasksToPage(arrTasks) {
         }
         // create p in task contain text of task
         let p = document.createElement('p');
+        p.className = 'task-title';
         p.innerHTML = t.title;
         task.appendChild(p);
+        // let text = document.createTextNode(t.title);
+        // task.appendChild(text);
+
         // add update icon, its modal and delete icon
         task.innerHTML += `
         <i class="fa-solid fa-pen-to-square edit" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
@@ -110,11 +114,6 @@ function addTasksToPage(arrTasks) {
 
 let taskId;
 tasks.addEventListener("click", (e) => {
-    // get the task id to updated
-    if (e.target.classList.contains('edit')) {
-        taskId = e.target.parentElement.getAttribute('data-id');
-    }
-
     // change the status of task
     if (e.target.classList.contains('check')) {
         // Toggle Completed For The Task
@@ -122,10 +121,15 @@ tasks.addEventListener("click", (e) => {
         // Toggle Done Class
         e.target.parentElement.classList.toggle("done");
         // change check icon
-        e.target.parentElement.firstElementChild.classList.toggle('fa-regular')
-        e.target.parentElement.firstElementChild.classList.toggle('fa-square')
-        e.target.parentElement.firstElementChild.classList.toggle('fa-solid')
-        e.target.parentElement.firstElementChild.classList.toggle('fa-square-check')
+        e.target.classList.toggle('fa-regular')
+        e.target.classList.toggle('fa-square')
+        e.target.classList.toggle('fa-solid')
+        e.target.classList.toggle('fa-square-check')
+    }
+
+    // get the task-id to update it
+    if (e.target.classList.contains('edit')) {
+        taskId = e.target.parentElement.getAttribute('data-id');
     }
 
     // update modal
@@ -147,7 +151,6 @@ tasks.addEventListener("click", (e) => {
             // clear input
             e.target.parentElement.parentElement.children[1].firstElementChild.value = '';
         }
-        console.log(arrTasks)
         addToLocalStorage(arrTasks);
     }
     if (e.target.classList.contains('cancel')) {
@@ -189,7 +192,7 @@ function addToLocalStorage(arrTasks) {
     window.localStorage.setItem('tasks', JSON.stringify(arrTasks));
 }
 
-function getData() {
+function getDataFromLS() {
     let data = window.localStorage.getItem('tasks');
     if (data) {
         addTasksToPage(JSON.parse(data));
