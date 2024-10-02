@@ -2,8 +2,7 @@
     --main-color: #0D6EFD;
     --alt-color: #CFE2FF;
     --main-border-radius: 8px;
-    /* --alt-color: #D1E9F6; */
-    /* --alt-color: #6EACDA; */
+    --background-color: #E9ECEF;
 }
 
 * {
@@ -44,6 +43,7 @@
         margin-bottom: 25px;
     }
 }
+
 .container-xl .app .form {
     background-color: var(--alt-color);
     display: flex;
@@ -94,10 +94,9 @@
 }
 
 .container-xl .app .tasks {
-    background-color: #E9ECEF;
+    background-color: var(--background-color);
     margin-top: 30px;
     border-radius: var(--main-border-radius);
-        border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .container-xl .app .tasks .task {
@@ -119,7 +118,7 @@
 .container-xl .app .tasks .task p {
     margin: 0;
     flex: 1;
-    margin-left: 10px;
+    margin: 0 10px;
     position: relative;
     line-height: 20px;
 }
@@ -142,4 +141,59 @@
 
 .btn-close:focus {
     box-shadow: none;
+}
+
+/* toast */
+.container-xl .notes {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    margin-left: 15px;
+    min-width: 350px;
+}
+.container-xl .notes .note {
+    display: flex;
+    align-items: center;
+    color: var(--main-color);
+    /* border-top-left-radius: var(--main-border-radius); */
+    /* border-top-right-radius: var(--main-border-radius); */
+    border-radius: var(--main-border-radius) var(--main-border-radius) 4px 4px;
+    padding: 15px 20PX;
+    box-shadow: 0 0 8px -3px rgba(0, 0, 0, 0.5);
+    font-size: 20px;
+    position: relative;
+    transform: translateX(100%);
+    animation: move 0.5s linear forwards;
+}
+
+@keyframes move {
+    100%{
+        transform: translateX(0%);
+    }
+}
+
+.container-xl .notes .note::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 4px;
+    background-color: var(--main-color);
+    border-bottom-left-radius: var(--main-border-radius);
+    border-bottom-right-radius: var(--main-border-radius);
+    animation: line 4s linear forwards;
+}
+
+@keyframes line {
+    100%{
+        width: 100%;
+    }
+}
+
+.container-xl .notes .note i {
+    margin-right: 10px;
 }

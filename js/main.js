@@ -53,6 +53,7 @@ getDataFromLS();
 function takeInput() {
     if (inputTask.value != '') {
         addTaskToList(inputTask.value);
+        showNote(`${inputTask.value} is Added Successfully`);
     }
     inputTask.value = '';
 }
@@ -63,6 +64,7 @@ inputTask.addEventListener('keydown', function (event) {
         takeInput();
     }
 })
+
 function addTaskToList(text) {
     // task data
     let task = {
@@ -76,23 +78,32 @@ function addTaskToList(text) {
     addTasksToPage(arrTasks);
     // add to localStorage
     addToLocalStorage(arrTasks);
+    // show notification
+
 }
 
 function addTasksToPage(arrTasks) {
+    // tasks.style.css.border = '1px solid rgba(0, 0, 0, 0.1)';
+    console.log(tasks)
+    if (arrTasks.length === 0) {
+        tasks.style.border = 'none'
+    } else {
+        tasks.style.border = '1px solid rgba(0, 0, 0, 0.1)'
+    }
+    // tasks.style.backgroundColor = 'red'
     tasks.innerHTML = '';
     arrTasks.forEach((t) => {
         // create task div
         let task = document.createElement('div');
-        task.className = 'task';
+        task.classList.add('task');
+        task.setAttribute('data-id', t.id);
         // check if task is done
         if (t.done) {
-            task.className = 'task done';
-        }
-        task.setAttribute('data-id', t.id);
-        // add check icon
-        if (t.done) {
+            task.classList.add('done');
+            // add check empty icon
             task.innerHTML = `<i class="fa-solid fa-square-check check"></i>`
         } else {
+            // add checked icon
             task.innerHTML = `<i class="fa-regular fa-square check"></i>`
         }
         // create p in task contain text of task
@@ -150,8 +161,8 @@ tasks.addEventListener("click", (e) => {
             }
             // clear input
             e.target.parentElement.parentElement.children[1].firstElementChild.value = '';
+            showNote(`${newValue} is Updated Successfully`);
         }
-        addToLocalStorage(arrTasks);
     }
     if (e.target.classList.contains('cancel')) {
         e.target.parentElement.parentElement.children[1].firstElementChild.value = '';
@@ -159,15 +170,23 @@ tasks.addEventListener("click", (e) => {
 
     //Delete Button
     if (e.target.classList.contains("delete")) {
+        // get title of task will be deleted
+        let titleDel;
         // remove task from the page
         e.target.parentElement.remove();
         // remove task from the array
         for (let i = 0; i < arrTasks.length; i++) {
             if (arrTasks[i].id == e.target.parentElement.getAttribute('data-id')) {
+                titleDel = arrTasks[i].title;
                 arrTasks.splice(i, 1);
                 break;
             }
         }
+        // delete border from tasks
+        if (arrTasks.length === 0) {
+            tasks.style.border = 'none';
+        }
+        showNote(`${titleDel} is Deleted Successfully`);
     }
     // update tasks in localStorage
     addToLocalStorage(arrTasks);
@@ -197,4 +216,19 @@ function getDataFromLS() {
     if (data) {
         addTasksToPage(JSON.parse(data));
     }
+}
+
+// notifications
+let notes = document.querySelector('.notes');
+function showNote(msg) {
+    let note = document.createElement('div')
+    note.className = 'note bg-light';
+    note.innerHTML = `
+    <i class="fa-solid fa-square-check"></i>
+    <span>${msg}</span>
+    `
+    notes.appendChild(note);
+    setTimeout(() => {
+        note.remove();
+    }, 4000);
 }
