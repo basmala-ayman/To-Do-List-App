@@ -1,0 +1,145 @@
+:root {
+    --main-color: #0D6EFD;
+    --alt-color: #CFE2FF;
+    --main-border-radius: 8px;
+    /* --alt-color: #D1E9F6; */
+    /* --alt-color: #6EACDA; */
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {}
+
+.container-xl {
+    /* background-color: #eee; */
+}
+
+.container-xl .app {
+    margin: 30px auto 0;
+    width: 75%;
+    /* background-color: #F8F9FA; */
+    padding: 15px;
+    border-radius: 10px;
+}
+
+@media (max-width: 991px) {
+    .container-xl .app {
+        width: 90%;
+    }
+}
+@media (max-width: 767px) {
+    .container-xl .app {
+        width: 100%;
+    }
+}
+
+.container-xl .app .title {
+    text-align: center;
+    color: var(--main-color);
+    margin-bottom: 30px;
+}
+
+.container-xl .app .form {
+    background-color: var(--alt-color);
+    display: flex;
+    /* padding: 10px; */
+    border-radius: var(--main-border-radius);
+    border: 1px solid var(--main-color);
+}
+
+.container-xl .app .form input {
+    flex: 1;
+    border: none;
+    font-size: 20px;
+    padding: 0 10px;
+    /* background-color: #777; */
+    border-top-left-radius: var(--main-border-radius);
+    border-bottom-left-radius: var(--main-border-radius);
+    caret-color: var(--main-color);
+    color: var(--main-color);
+}
+
+.container-xl .app .form input:focus {
+    outline: none;
+}
+
+.container-xl .app .form input::selection {
+    background-color: var(--alt-color);
+    /* color: white; */
+    color: var(--main-color);
+}
+
+.container-xl .app .form button {
+    padding: 6px 40px;
+    border: none;
+    font-size: 24px;
+    font-weight: 500;
+    background-color: var(--main-color);
+    /* background-color: rgba(110, 171, 218, 0.1); */
+    /* opacity: 0.7; */
+    color: white;
+    /* color: var(--main-color); */
+    border-top-right-radius: var(--main-border-radius);
+    border-bottom-right-radius: var(--main-border-radius);
+}
+
+.container-xl .app .form button:hover {
+    font-weight: bold;
+}
+
+.container-xl .app .tasks {
+    background-color: #E9ECEF;
+    margin-top: 30px;
+    border-radius: var(--main-border-radius);
+}
+
+.container-xl .app .tasks .task {
+    /* background-color: #777; */
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    font-size: 20px;
+    color: var(--main-color);
+    padding: 15px;
+}
+
+.container-xl .app .tasks .task:not(:last-child) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.container-xl .app .tasks .task i {
+    cursor: pointer;
+}
+
+.container-xl .app .tasks .task p {
+    margin: 0;
+    flex: 1;
+    /* margin-right: 50px; */
+    margin-left: 10px;
+    position: relative;
+    width: fit-content;
+    line-height: 20px;
+}
+
+.container-xl .app .tasks .task.done p::after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 95%;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.container-xl .app .tasks .task i:last-child {
+    margin-left: 10px;
+    color: #DC3545;
+}
+
+.btn-close:focus{
+    box-shadow: none;
+}
