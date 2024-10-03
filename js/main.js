@@ -2,54 +2,56 @@ let inputTask = document.getElementById('input-task');
 let addBtn = document.getElementById('add');
 let tasks = document.querySelector('.app .tasks');
 
-// let modal = `
-// <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-//     <div class="modal-dialog">
-//         <div class="modal-content">
-//             <div class="modal-header">
-//                 <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-//                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-//             </div>
-//             <div class="modal-body">
-//                 <input type="text" class="form-control updated-task" placeholder="Enter your updated task">
-//             </div>
-//             <div class="modal-footer">
-//                 <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">Cancel</button>
-//                 <button type="button" class="btn btn-primary update">Update</button>
-//             </div>
-//         </div>
-//     </div>
-// </div>`
+let modal = `
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Update</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" class="form-control" autofocus placeholder="Enter your updated task">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary update">Update</button>
+            </div>
+        </div>
+    </div>
+</div>`
 
-let modal = `<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Update</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <input type="text" class="form-control" placeholder="Enter your updated task">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary cancel"
-                                data-bs-dismiss="modal cancel">Cancel</button>
-                            <button type="button" class="btn btn-primary update">Update</button>
-                        </div>
-                    </div>
-                </div>
-            </div>`
+// let modal = `<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+//                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+//                 <div class="modal-dialog">
+//                     <div class="modal-content">
+//                         <div class="modal-header">
+//                             <h1 class="modal-title fs-5" id="exampleModalLabel">Update</h1>
+//                             <button type="button" class="btn-close" data-bs-dismiss="modal"
+//                                 aria-label="Close"></button>
+//                         </div>
+//                         <div class="modal-body">
+//                             <input type="text" class="form-control" autofocus placeholder="Enter your updated task">
+//                         </div>
+//                         <div class="modal-footer">
+//                             <button type="button" class="btn btn-secondary cancel"
+//                                 data-bs-dismiss="modal cancel">Cancel</button>
+//                             <button type="button" class="btn btn-primary update">Update</button>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>`
 
 let arrTasks = [];
-// localStorage.clear()
+
+// check if there is data in localStorage
 if (localStorage.getItem('tasks')) {
+    // if yes get data from localStorage to array and page
     arrTasks = JSON.parse(localStorage.getItem('tasks'));
+    addTasksToPage(arrTasks);
 }
 
-getDataFromLS();
-
+// take task from input box
 function takeInput() {
     if (inputTask.value != '') {
         addTaskToList(inputTask.value);
@@ -58,13 +60,16 @@ function takeInput() {
     inputTask.value = '';
 }
 
+// add task when user clicks on Add button
 addBtn.addEventListener('click', takeInput);
+// add task when user presses enter
 inputTask.addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
         takeInput();
     }
 })
 
+// store tasks as objects in an array
 function addTaskToList(text) {
     // task data
     let task = {
@@ -82,9 +87,8 @@ function addTaskToList(text) {
 
 }
 
+// print tasks in our page
 function addTasksToPage(arrTasks) {
-    // tasks.style.css.border = '1px solid rgba(0, 0, 0, 0.1)';
-    console.log(tasks)
     if (arrTasks.length === 0) {
         tasks.style.border = 'none'
     } else {
@@ -108,21 +112,19 @@ function addTasksToPage(arrTasks) {
         }
         // create p in task contain text of task
         let p = document.createElement('p');
-        p.className = 'task-title';
         p.innerHTML = t.title;
         task.appendChild(p);
-        // let text = document.createTextNode(t.title);
-        // task.appendChild(text);
 
         // add update icon, its modal and delete icon
         task.innerHTML += `
-        <i class="fa-solid fa-pen-to-square edit" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
+        <i class="fa-solid fa-pen-to-square edit" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
         ${modal}
         <i class="fa-solid fa-trash delete"></i>`
         tasks.appendChild(task);
     })
 }
 
+// task functionalities such as: check as done, edit and delete tasks
 let taskId;
 tasks.addEventListener("click", (e) => {
     // change the status of task
@@ -164,29 +166,31 @@ tasks.addEventListener("click", (e) => {
             showNote(`${newValue} is Updated Successfully`);
         }
     }
+    // when user click cancel it will clear the input box
     if (e.target.classList.contains('cancel')) {
         e.target.parentElement.parentElement.children[1].firstElementChild.value = '';
     }
 
     //Delete Button
     if (e.target.classList.contains("delete")) {
+        let delTask = e.target.parentElement
         // get title of task will be deleted
         let titleDel;
-        // remove task from the page
-        e.target.parentElement.remove();
-        // remove task from the array
-        for (let i = 0; i < arrTasks.length; i++) {
-            if (arrTasks[i].id == e.target.parentElement.getAttribute('data-id')) {
-                titleDel = arrTasks[i].title;
-                arrTasks.splice(i, 1);
-                break;
+        // Add transition
+        delTask.classList.add('fade-out');
+        setTimeout(() => {
+            // remove task from the page
+            delTask.remove();
+            // remove task from the array
+            arrTasks = arrTasks.filter((task) => task.id != delTask.getAttribute('data-id'));
+            // delete border from tasks if all tasks were deleted
+            if (arrTasks.length === 0) {
+                tasks.style.border = 'none';
             }
-        }
-        // delete border from tasks
-        if (arrTasks.length === 0) {
-            tasks.style.border = 'none';
-        }
-        showNote(`${titleDel} is Deleted Successfully`);
+            // update tasks in localStorage
+            addToLocalStorage(arrTasks);
+            showNote(`${titleDel} is Deleted Successfully`);
+        }, 400);
     }
     // update tasks in localStorage
     addToLocalStorage(arrTasks);
@@ -209,13 +213,6 @@ function toggleStatus(taskId) {
 // add tasks to localStorage
 function addToLocalStorage(arrTasks) {
     window.localStorage.setItem('tasks', JSON.stringify(arrTasks));
-}
-
-function getDataFromLS() {
-    let data = window.localStorage.getItem('tasks');
-    if (data) {
-        addTasksToPage(JSON.parse(data));
-    }
 }
 
 // notifications

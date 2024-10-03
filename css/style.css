@@ -53,6 +53,7 @@
 
 .container-xl .app .form input {
     flex: 1;
+    width: 80%;
     border: none;
     font-size: 20px;
     padding: 0 10px;
@@ -72,7 +73,8 @@
 }
 
 .container-xl .app .form button {
-    padding: 6px 40px;
+    padding: 6px 0;
+    width: 20%;
     border: none;
     font-size: 24px;
     font-weight: 500;
@@ -89,7 +91,12 @@
 @media (max-width: 767px) {
     .container-xl .app .form button {
         font-size: 22px;
-        padding: 6px 15px;
+    }
+}
+
+@media (max-width: 399px) {
+    .container-xl .app .form button {
+        font-size: 20px;
     }
 }
 
@@ -102,10 +109,20 @@
 .container-xl .app .tasks .task {
     display: flex;
     align-items: center;
+    gap: 10px;
     font-size: 20px;
     color: var(--main-color);
     padding: 15px;
+    /* opacity: 1; */
+    /* transform: translateY(0); */
 }
+
+.container-xl .app .tasks .task.fade-out {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
 
 .container-xl .app .tasks .task:not(:last-child) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -118,7 +135,6 @@
 .container-xl .app .tasks .task p {
     margin: 0;
     flex: 1;
-    margin: 0 10px;
     position: relative;
     line-height: 20px;
 }
@@ -129,13 +145,12 @@
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-    width: 95%;
+    width: 100%;
     height: 1px;
     background-color: rgba(0, 0, 0, 0.4);
 }
 
 .container-xl .app .tasks .task i:last-child {
-    margin-left: 10px;
     color: #DC3545;
 }
 
@@ -152,14 +167,19 @@
     bottom: 15px;
     right: 15px;
     margin-left: 15px;
-    min-width: 350px;
+    min-width: 290px;
 }
+
+@media (max-width: 399px) {
+    .container-xl .notes {
+        width: calc(100% - 30px);
+    }
+}
+
 .container-xl .notes .note {
     display: flex;
     align-items: center;
     color: var(--main-color);
-    /* border-top-left-radius: var(--main-border-radius); */
-    /* border-top-right-radius: var(--main-border-radius); */
     border-radius: var(--main-border-radius) var(--main-border-radius) 4px 4px;
     padding: 15px 20PX;
     box-shadow: 0 0 8px -3px rgba(0, 0, 0, 0.5);
@@ -170,12 +190,12 @@
 }
 
 @keyframes move {
-    100%{
+    100% {
         transform: translateX(0%);
     }
 }
 
-.container-xl .notes .note::after{
+.container-xl .notes .note::after {
     content: '';
     position: absolute;
     left: 0;
@@ -189,7 +209,7 @@
 }
 
 @keyframes line {
-    100%{
+    100% {
         width: 100%;
     }
 }
