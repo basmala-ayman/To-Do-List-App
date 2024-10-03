@@ -11,7 +11,7 @@ let modal = `
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <input type="text" class="form-control" autofocus placeholder="Enter your updated task">
+                <input id='new-title' type="text" class="form-control" autofocus placeholder="Enter your updated task">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary cancel" data-bs-dismiss="modal">Cancel</button>
@@ -20,27 +20,6 @@ let modal = `
         </div>
     </div>
 </div>`
-
-// let modal = `<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
-//                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-//                 <div class="modal-dialog">
-//                     <div class="modal-content">
-//                         <div class="modal-header">
-//                             <h1 class="modal-title fs-5" id="exampleModalLabel">Update</h1>
-//                             <button type="button" class="btn-close" data-bs-dismiss="modal"
-//                                 aria-label="Close"></button>
-//                         </div>
-//                         <div class="modal-body">
-//                             <input type="text" class="form-control" autofocus placeholder="Enter your updated task">
-//                         </div>
-//                         <div class="modal-footer">
-//                             <button type="button" class="btn btn-secondary cancel"
-//                                 data-bs-dismiss="modal cancel">Cancel</button>
-//                             <button type="button" class="btn btn-primary update">Update</button>
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>`
 
 let arrTasks = [];
 
@@ -119,7 +98,7 @@ function addTasksToPage(arrTasks) {
         task.innerHTML += `
         <i class="fa-solid fa-pen-to-square edit" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
         ${modal}
-        <i class="fa-solid fa-trash delete"></i>`
+        <i class="fa-solid fa-trash delete text-danger"></i>`
         tasks.appendChild(task);
     })
 }
@@ -143,6 +122,8 @@ tasks.addEventListener("click", (e) => {
     // get the task-id to update it
     if (e.target.classList.contains('edit')) {
         taskId = e.target.parentElement.getAttribute('data-id');
+        let inputBox = document.getElementById('new-title');
+        inputBox.value = e.target.parentElement.children[1].innerHTML;
     }
 
     // update modal

@@ -113,16 +113,14 @@
     font-size: 20px;
     color: var(--main-color);
     padding: 15px;
-    /* opacity: 1; */
-    /* transform: translateY(0); */
 }
 
+/* to add transition on deleting action */
 .container-xl .app .tasks .task.fade-out {
     opacity: 0;
     transform: translateY(15px);
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
-
 
 .container-xl .app .tasks .task:not(:last-child) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -150,11 +148,8 @@
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.container-xl .app .tasks .task i:last-child {
-    color: #DC3545;
-}
-
-.btn-close:focus {
+.btn-close:focus,
+.form-control:focus {
     box-shadow: none;
 }
 
