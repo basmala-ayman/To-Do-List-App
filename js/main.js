@@ -82,7 +82,6 @@ function addTasksToPage(arrTasks) {
         task.setAttribute('data-id', t.id);
         // check if task is done
         if (t.done) {
-            task.classList.add('done');
             // add check empty icon
             task.innerHTML = `<i class="fa-solid fa-square-check check"></i>`
         } else {
@@ -92,6 +91,9 @@ function addTasksToPage(arrTasks) {
         // create p in task contain text of task
         let p = document.createElement('p');
         p.innerHTML = t.title;
+        if (t.done) {
+            p.classList.add('done');
+        }
         task.appendChild(p);
 
         // add update icon, its modal and delete icon
@@ -117,6 +119,8 @@ tasks.addEventListener("click", (e) => {
         e.target.classList.toggle('fa-square')
         e.target.classList.toggle('fa-solid')
         e.target.classList.toggle('fa-square-check')
+        // line
+        e.target.parentElement.children[1].classList.toggle('done');
     }
 
     // get the task-id to update it
@@ -156,7 +160,7 @@ tasks.addEventListener("click", (e) => {
     if (e.target.classList.contains("delete")) {
         let delTask = e.target.parentElement
         // get title of task will be deleted
-        let titleDel;
+        let titleDel = delTask.children[1].innerHTML;
         // Add transition
         delTask.classList.add('fade-out');
         setTimeout(() => {
