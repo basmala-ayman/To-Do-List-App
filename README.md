@@ -55,20 +55,6 @@ The project consists of three main files:
     - Handles event listeners and DOM manipulation for dynamic task management.
     - Implements transition effects for task actions (add, edit, delete).
 
-## How to Run the Project
-
-1. Download or clone the repository to your local machine.
-2. Open the **index.html** file in any modern web browser.
-3. The application is ready to use without any additional configuration or installations.
-
-## Future Enhancements
-
-- **Task Priorities**: Add support for setting task priority (low, medium, high) with color-coding.
-- **Due Dates & Reminders**: Assign due dates to tasks and notify users as deadlines approach.
-- **Drag-and-Drop**: Allow users to reorder tasks using drag-and-drop.
-- **Search and Filters**: Add a search feature to find tasks quickly, and filters to show completed, pending, or high-priority tasks.
-- **Sync Across Devices**: Use a backend or cloud service like Firebase to sync tasks across multiple devices.
-
 ## Technologies Used
 
 - **HTML5**: Structure of the app.
