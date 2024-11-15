@@ -1,12 +1,21 @@
 # To-Do List Web Application
 
-## Project Overview
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [How It Works: User Interaction](#how-it-works-user-interaction)
+- [Technologies Used](#technologies-used)
+
+---
+
+## [Project Overview](#project-overview)
 
 This **To-Do List Web Application** is a fully responsive and interactive task management tool built using **HTML5**, **CSS3**, **Bootstrap**, and **JavaScript**. The app enables users to easily add, edit, mark complete, and delete tasks. It features seamless data persistence using **localStorage**, ensuring tasks are saved across browser sessions. With a modern UI and intuitive task management experience, this app is designed to enhance productivity and help users stay organized.
 
 ---
 
-## Features
+## [Features](#features)
 
 ### 1. **Add New Tasks**
 - **Input Box:** Users can type in tasks in a text input field.
@@ -30,7 +39,7 @@ This **To-Do List Web Application** is a fully responsive and interactive task m
 
 ---
 
-## Project Structure
+## [Project Structure](#project-structure)
 
 The project consists of three primary files:
 1. **index.html**  
@@ -57,7 +66,7 @@ The project consists of three primary files:
 
 ---
 
-## How It Works: User Interaction
+## [How It Works: User Interaction](#how-it-works-user-interaction)
 
 1. **Adding a Task:**
    - The user types a task into the input field and either clicks the "Add" button or presses the "Enter" key. 
@@ -81,7 +90,7 @@ The project consists of three primary files:
 
 ---
 
-## Technologies Used
+## [Technologies Used](#technologies-used)
 - **HTML5**: Provides the structure and layout of the application.
 - **CSS3**: Offers the visual styling and responsive design, ensuring the app is visually appealing across different devices.
 - **Bootstrap 5**: Adds responsive design elements and built-in components like modals.
